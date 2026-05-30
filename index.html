@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SimulaciónBolivia · Métodos Numéricos</title>
+  <meta name="description" content="Simulación numérica de abastecimiento, precios y conflicto social en Bolivia mediante métodos numéricos: sistemas lineales, raíces, interpolación, integración y EDO." />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="css/styles.css" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ===================== NAVBAR ===================== -->
+  <nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+      <a class="navbar-brand text-white" href="index.html">Simulación<span class="text-orange">Bolivia</span><span class="dot">.</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-label="Menú">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="nav">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-1">
+          <li class="nav-item"><a class="nav-link active" href="index.html">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="pages/modulo1.html">1 · Sistemas</a></li>
+          <li class="nav-item"><a class="nav-link" href="pages/modulo2.html">2 · Raíces</a></li>
+          <li class="nav-item"><a class="nav-link" href="pages/modulo3.html">3 · Interpolación</a></li>
+          <li class="nav-item"><a class="nav-link" href="pages/modulo4.html">4 · Integración</a></li>
+          <li class="nav-item"><a class="nav-link" href="pages/modulo5.html">5 · EDO</a></li>
+          <li class="nav-item"><a class="nav-link" href="#conclusiones">Conclusiones</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===================== HERO ===================== -->
+  <header class="hero">
+    <div class="container">
+      <span class="badge-bo mb-3">🇧🇴 Proyecto Final · Métodos Numéricos</span>
+      <h1 class="mb-3">Simulación numérica de <span class="gradient-text">abastecimiento, precios y conflicto social</span> en Bolivia</h1>
+      <div class="flag-strip mb-4"></div>
+      <p class="lead mb-4">
+        Una herramienta web interactiva que aplica <strong>métodos numéricos</strong> para modelar la
+        crisis de carburantes, la subida de precios de la canasta básica y la dinámica social.
+        No busca una simulación perfecta, sino convertir la matemática en un aliado para
+        <strong>contrastar escenarios</strong> y apoyar la toma de decisiones.
+      </p>
+      <div class="d-flex flex-wrap gap-2">
+        <a href="pages/modulo1.html" class="btn btn-blue px-4 py-2">🚀 Empezar a simular</a>
+        <a href="#modulos" class="btn btn-ghost px-4 py-2">Ver los 5 módulos</a>
+        <a href="#conclusiones" class="btn btn-ghost px-4 py-2">Conclusiones</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===================== CONTEXTO ===================== -->
+  <section class="container my-5">
+    <span class="section-tag">El problema real</span>
+    <h2 class="mb-3">¿Por qué modelar la crisis con números?</h2>
+    <p class="text-soft mb-4" style="max-width: 820px;">
+      Bolivia atraviesa episodios de <strong>escasez de combustible</strong>, largas filas en estaciones de servicio,
+      bloqueos de caminos, <strong>incremento sostenido de precios</strong> de alimentos básicos como la papa, y rumores
+      que disparan compras de pánico. Cada uno de estos fenómenos esconde un modelo matemático que podemos
+      resolver numéricamente para anticipar lo que viene.
+    </p>
+    <div class="row g-3">
+      <div class="col-md-4">
+        <div class="ctx-card">
+          <div class="ic">⛽</div>
+          <h6 class="mt-2 text-white">Abastecimiento</h6>
+          <p class="text-soft mb-0 small">¿Cuánto combustible enviar desde cada planta a cada zona? ¿Qué pasa si una ruta se bloquea? Lo resolvemos con <span class="tag tag-blue">sistemas lineales</span>.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="ctx-card">
+          <div class="ic">📈</div>
+          <h6 class="mt-2 text-white">Precios</h6>
+          <p class="text-soft mb-0 small">Con pocos datos por semana reconstruimos la curva de precios e integramos el gasto mensual de una familia. <span class="tag tag-orange">interpolación + integración</span>.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="ctx-card">
+          <div class="ic">⏳</div>
+          <h6 class="mt-2 text-white">Reservas y umbrales</h6>
+          <p class="text-soft mb-0 small">¿Cuándo se agotan las reservas? ¿Cuándo el gasto supera el ingreso familiar? Lo predecimos con <span class="tag tag-blue">EDO</span> y <span class="tag tag-orange">raíces</span>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== MÓDULOS ===================== -->
+  <section class="container my-5" id="modulos">
+    <span class="section-tag">Explora</span>
+    <h2 class="mb-1">Los 5 módulos de simulación</h2>
+    <p class="text-soft mb-4">Cada módulo implementa varios métodos numéricos <strong>desde cero en JavaScript</strong>, con datos de ejemplo precargados.</p>
+    <div class="row g-4">
+
+      <div class="col-md-6 col-lg-4">
+        <a href="pages/modulo1.html" class="module-card card-soft p-4">
+          <div class="d-flex justify-content-between align-items-start mb-3">
+            <div class="icon-box">Σ</div>
+            <span class="pill">Módulo 1 · Escenario A</span>
+          </div>
+          <h5 class="text-white mb-1">Sistemas de ecuaciones lineales</h5>
+          <p class="text-soft small mb-3">Distribución de carburantes desde 3 plantas hacia las zonas Norte, Centro y Sur.</p>
+          <div class="d-flex flex-wrap gap-1">
+            <span class="tag tag-blue">LU</span><span class="tag tag-blue">Jacobi</span>
+            <span class="tag tag-blue">Gauss-Seidel</span><span class="tag tag-blue">SOR</span>
+            <span class="tag tag-blue">Grad. Conjugado</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <a href="pages/modulo2.html" class="module-card alt card-soft p-4">
+          <div class="d-flex justify-content-between align-items-start mb-3">
+            <div class="icon-box">ƒ</div>
+            <span class="pill">Módulo 2 · Escenario E</span>
+          </div>
+          <h5 class="text-white mb-1">Raíces de ecuaciones</h5>
+          <p class="text-soft small mb-3">Umbral crítico: el día en que el costo acumulado supera el ingreso familiar.</p>
+          <div class="d-flex flex-wrap gap-1">
+            <span class="tag tag-orange">Bisección</span><span class="tag tag-orange">Newton-Raphson</span>
+            <span class="tag tag-orange">Secante</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <a href="pages/modulo3.html" class="module-card card-soft p-4">
+          <div class="d-flex justify-content-between align-items-start mb-3">
+            <div class="icon-box">∿</div>
+            <span class="pill">Módulo 3 · Escenario C</span>
+          </div>
+          <h5 class="text-white mb-1">Interpolación</h5>
+          <p class="text-soft small mb-3">Curva continua del precio de la papa a partir de datos dispersos por semana.</p>
+          <div class="d-flex flex-wrap gap-1">
+            <span class="tag tag-blue">Lagrange</span><span class="tag tag-blue">Newton</span>
+            <span class="tag tag-blue">Splines cúbicos</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <a href="pages/modulo4.html" class="module-card alt card-soft p-4">
+          <div class="d-flex justify-content-between align-items-start mb-3">
+            <div class="icon-box">∫</div>
+            <span class="pill">Módulo 4 · Escenario D</span>
+          </div>
+          <h5 class="text-white mb-1">Integración numérica</h5>
+          <p class="text-soft small mb-3">Costo acumulado mensual de la canasta y pérdida del poder adquisitivo.</p>
+          <div class="d-flex flex-wrap gap-1">
+            <span class="tag tag-orange">Trapecio</span><span class="tag tag-orange">Simpson 1/3</span>
+            <span class="tag tag-orange">Simpson 3/8</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <a href="pages/modulo5.html" class="module-card card-soft p-4">
+          <div class="d-flex justify-content-between align-items-start mb-3">
+            <div class="icon-box">∂</div>
+            <span class="pill">Módulo 5 · Escenario B</span>
+          </div>
+          <h5 class="text-white mb-1">Ecuaciones diferenciales</h5>
+          <p class="text-soft small mb-3">Vaciado de reservas: R′(t) = entrada − consumo, con detección de nivel crítico.</p>
+          <div class="d-flex flex-wrap gap-1">
+            <span class="tag tag-blue">Euler</span><span class="tag tag-blue">Heun</span>
+            <span class="tag tag-blue">RK4</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <a href="#conclusiones" class="module-card alt card-soft p-4">
+          <div class="d-flex justify-content-between align-items-start mb-3">
+            <div class="icon-box">✓</div>
+            <span class="pill">Cierre</span>
+          </div>
+          <h5 class="text-white mb-1">Conclusiones y limitaciones</h5>
+          <p class="text-soft small mb-3">Qué método fue mejor en cada módulo, limitaciones del modelo y mejoras posibles.</p>
+          <div class="d-flex flex-wrap gap-1">
+            <span class="tag tag-orange">Análisis crítico</span>
+          </div>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================== CONCLUSIONES ===================== -->
+  <section class="container my-5" id="conclusiones">
+    <span class="section-tag">Análisis final</span>
+    <h2 class="mb-3">Conclusiones, limitaciones y mejoras</h2>
+
+    <!-- Mejor método por módulo -->
+    <div class="card-soft p-4 mb-4">
+      <h5 class="text-white mb-3">🏆 ¿Qué método fue más preciso / eficiente en cada módulo?</h5>
+      <div class="table-responsive">
+        <table class="table concl-table align-middle">
+          <thead>
+            <tr><th>Módulo</th><th>Método más recomendable</th><th>¿Por qué?</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="tag tag-blue">1 · Sistemas</span></td>
+              <td><strong>LU</strong> (directo) y <strong>Gradiente Conjugado</strong> (iterativo)</td>
+              <td class="text-soft">LU da solución exacta sin depender de convergencia. Para matrices grandes y simétricas definidas positivas, el Gradiente Conjugado converge en pocas iteraciones. Jacobi es el más lento; Gauss-Seidel y SOR (ω≈1.1–1.5) lo aceleran.</td>
+            </tr>
+            <tr>
+              <td><span class="tag tag-orange">2 · Raíces</span></td>
+              <td><strong>Newton-Raphson</strong></td>
+              <td class="text-soft">Convergencia cuadrática: alcanza la tolerancia en muy pocas iteraciones. Su debilidad es necesitar la derivada y un buen valor inicial. Bisección es la más robusta (siempre converge si hay cambio de signo) pero lenta; la Secante es un punto intermedio.</td>
+            </tr>
+            <tr>
+              <td><span class="tag tag-blue">3 · Interpolación</span></td>
+              <td><strong>Splines cúbicos</strong></td>
+              <td class="text-soft">Evitan las oscilaciones de Runge que aparecen con Lagrange/Newton de alto grado cuando los datos están dispersos. Producen una curva suave y estable, ideal para precios. Newton es más eficiente que Lagrange para añadir puntos.</td>
+            </tr>
+            <tr>
+              <td><span class="tag tag-orange">4 · Integración</span></td>
+              <td><strong>Simpson 1/3</strong></td>
+              <td class="text-soft">Error de orden O(h⁴): mucho más preciso que el Trapecio con el mismo número de subintervalos. Requiere n par. Simpson 3/8 es útil cuando n es múltiplo de 3. El Trapecio es el más simple pero el menos exacto.</td>
+            </tr>
+            <tr>
+              <td><span class="tag tag-blue">5 · EDO</span></td>
+              <td><strong>RK4</strong></td>
+              <td class="text-soft">Error local O(h⁵): la mejor relación precisión/costo. Euler acumula error rápidamente con pasos grandes; Heun (RK2) lo mejora; RK4 es prácticamente exacto para este modelo de reservas.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-lg-6">
+        <div class="interp h-100">
+          <h6>⚠️ Limitaciones del modelo matemático</h6>
+          <ul class="mb-0 text-soft">
+            <li>Los modelos asumen comportamientos <strong>idealizados y continuos</strong>; la realidad social tiene saltos, decisiones humanas y eventos imprevistos (bloqueos repentinos).</li>
+            <li>La <strong>interpolación</strong> solo es confiable <em>dentro</em> del rango de datos; extrapolar fuera de él (p. ej. día 40) puede dar valores irreales.</li>
+            <li>Los <strong>sistemas lineales</strong> suponen relaciones proporcionales; un mercado real es no lineal y puede estar mal condicionado (escenario F).</li>
+            <li>Las <strong>EDO</strong> dependen fuertemente de parámetros (entrada, consumo, pánico) que en la práctica son difíciles de medir con precisión.</li>
+            <li>No se incluyen variables externas: clima, decisiones políticas, contrabando o subsidios.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="algo-box h-100">
+          <h6>🚀 Mejoras posibles</h6>
+          <ul class="mb-0">
+            <li>Incorporar <strong>datos reales</strong> del INE o de mercados para calibrar los modelos.</li>
+            <li>Añadir <strong>análisis de sensibilidad</strong> y número de condición (escenario F) para medir estabilidad ante rumores.</li>
+            <li>Extender el módulo 5 al <strong>modelo social N-M-D</strong> (escenario G) con sistemas de EDO acopladas.</li>
+            <li>Permitir <strong>cargar datos por CSV</strong> y exportar resultados a PDF.</li>
+            <li>Estimar automáticamente el <strong>orden de convergencia</strong> comparando errores sucesivos.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-soft p-4 mt-4">
+      <h5 class="text-white mb-2">🎓 Reflexión académica sobre el contexto boliviano</h5>
+      <p class="text-soft mb-0">
+        Este proyecto demuestra que los métodos numéricos no son ejercicios abstractos: son herramientas
+        para <strong>entender la realidad de Bolivia</strong>. Con un puñado de datos podemos estimar cuándo se
+        agotará el combustible de una planta, cuánto golpeará al bolsillo de una familia la subida de la papa,
+        o qué zona quedará más desabastecida si se bloquea una ruta. El valor está en <strong>contrastar
+        escenarios</strong> —no en predecir el futuro con certeza— para apoyar decisiones más informadas y
+        equitativas. El análisis se mantiene estrictamente académico, sin posicionamientos políticos: la
+        matemática como lenguaje neutral para describir y anticipar problemas comunes.
+      </p>
+    </div>
+
+    <!-- Qué se aprendió -->
+    <div class="row g-3 mt-2">
+      <div class="col-md-6">
+        <div class="kpi">
+          <div class="label">Qué se aprendió</div>
+          <div class="text-soft mt-1 small">A traducir un problema real a un modelo matemático, elegir el método numérico adecuado según robustez/velocidad/precisión, y comunicar resultados con tablas, gráficos e interpretación clara.</div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="kpi">
+          <div class="label">Método más útil global</div>
+          <div class="text-soft mt-1 small"><strong>RK4</strong> y <strong>Splines cúbicos</strong> destacaron por estabilidad; <strong>Newton-Raphson</strong> y <strong>LU</strong> por velocidad y exactitud. La elección siempre depende del problema concreto.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="row gy-3">
+        <div class="col-md-6">
+          <h6 class="text-white mb-1">Simulación<span class="text-orange">Bolivia</span> · Métodos Numéricos</h6>
+          <p class="mb-0">Proyecto final individual — Escenarios A, B, C, D y E.</p>
+          <p class="mb-0">Universidad · Ingeniería Informática · Quinto Semestre.</p>
+        </div>
+        <div class="col-md-6 text-md-end">
+          <p class="mb-1">Construido con HTML, CSS, JavaScript puro, Bootstrap 5 y Chart.js.</p>
+          <p class="mb-0">Todos los algoritmos numéricos implementados desde cero. 2026.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <button class="scroll-top" id="scrollTop" aria-label="Subir">↑</button>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const st = document.getElementById('scrollTop');
+    window.addEventListener('scroll', () => { st.style.display = window.scrollY > 500 ? 'grid' : 'none'; });
+    st.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  </script>
+</body>
+</html>

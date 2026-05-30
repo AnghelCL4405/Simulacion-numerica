@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Módulo 1 · Sistemas lineales — SimulaciónBolivia</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="../css/styles.css" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+      <a class="navbar-brand text-white" href="../index.html">Simulación<span class="text-orange">Bolivia</span><span class="dot">.</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-label="Menú"><span class="navbar-toggler-icon"></span></button>
+      <div class="collapse navbar-collapse" id="nav">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-1">
+          <li class="nav-item"><a class="nav-link" href="../index.html">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link active" href="modulo1.html">1 · Sistemas</a></li>
+          <li class="nav-item"><a class="nav-link" href="modulo2.html">2 · Raíces</a></li>
+          <li class="nav-item"><a class="nav-link" href="modulo3.html">3 · Interpolación</a></li>
+          <li class="nav-item"><a class="nav-link" href="modulo4.html">4 · Integración</a></li>
+          <li class="nav-item"><a class="nav-link" href="modulo5.html">5 · EDO</a></li>
+          <li class="nav-item"><a class="nav-link" href="../index.html#conclusiones">Conclusiones</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HEADER -->
+  <header class="container module-hero">
+    <span class="num">Módulo 1 · Escenario A</span>
+    <h1 class="mt-1">Sistemas de ecuaciones lineales</h1>
+    <p class="text-soft mb-2" style="max-width: 840px;">
+      <strong>Distribución de carburantes.</strong> Una ciudad debe repartir combustible desde 3 plantas
+      hacia las zonas <span class="text-orange">Norte, Centro y Sur</span>. El sistema <span class="mono">A·x = b</span>
+      modela cuánto enviar a cada zona según capacidad y demanda. Resolviéndolo sabemos la distribución óptima
+      y qué pasa si una ruta se bloquea.
+    </p>
+    <div class="d-flex flex-wrap gap-1">
+      <span class="tag tag-blue">LU</span><span class="tag tag-blue">Jacobi</span>
+      <span class="tag tag-blue">Gauss-Seidel</span><span class="tag tag-blue">SOR</span><span class="tag tag-blue">Gradiente Conjugado</span>
+    </div>
+  </header>
+
+  <main class="container pb-5">
+    <div class="row g-4">
+
+      <!-- PANEL IZQUIERDO: ENTRADA -->
+      <div class="col-lg-5">
+        <div class="card-soft p-4">
+          <h5 class="text-white mb-3">⚙️ Configuración</h5>
+
+          <label class="form-label">Método numérico <span class="badge-select">▼ desplegable</span></label>
+          <select id="methodSelect" class="form-select method-select mb-3">
+            <option value="lu">LU (descomposición con pivoteo parcial)</option>
+            <option value="jacobi">Jacobi</option>
+            <option value="gauss">Gauss-Seidel</option>
+            <option value="sor">SOR (relajación)</option>
+            <option value="cg">Gradiente Conjugado</option>
+          </select>
+
+          <label class="form-label">Tamaño de la matriz (n)</label>
+          <select id="matSize" class="form-select mb-3">
+            <option value="2">2 × 2</option>
+            <option value="3" selected>3 × 3 (3 plantas → 3 zonas)</option>
+            <option value="4">4 × 4</option>
+            <option value="5">5 × 5</option>
+          </select>
+
+          <label class="form-label">Matriz A &nbsp;|&nbsp; vector b</label>
+          <div class="matrix-wrap mb-2">
+            <div class="matrix-block"><div id="matrixA" class="matrix-grid"></div></div>
+            <div class="d-flex align-items-center text-dim">=</div>
+            <div class="matrix-block"><div id="vectorB" class="vector-grid"></div></div>
+          </div>
+          <p id="zoneHint" class="form-text mb-3">Filas = plantas · columnas = aporte a cada zona · b = demanda total por ecuación.</p>
+
+          <div id="iterParams" class="row g-2 mb-3">
+            <div class="col-6">
+              <label class="form-label">Tolerancia</label>
+              <input id="tol" type="number" step="any" class="form-control" value="1e-8" />
+            </div>
+            <div class="col-6">
+              <label class="form-label">Máx. iteraciones</label>
+              <input id="maxIter" type="number" class="form-control" value="100" />
+            </div>
+          </div>
+
+          <div id="sorOmegaWrap" class="mb-3" style="display:none;">
+            <label class="form-label">Factor de relajación ω (SOR)</label>
+            <input id="omega" type="number" step="0.05" min="0.1" max="1.99" class="form-control" value="1.1" />
+            <p class="form-text">1 = Gauss-Seidel · 1&lt;ω&lt;2 acelera · ω&lt;1 estabiliza.</p>
+          </div>
+
+          <div class="d-flex gap-2">
+            <button id="btnCalc" class="btn btn-blue flex-fill py-2">Calcular</button>
+            <button id="btnExample" class="btn btn-ghost py-2">Cargar ejemplo</button>
+          </div>
+        </div>
+
+        <!-- ALGORITMO -->
+        <div class="algo-box mt-4" id="algoBox"></div>
+      </div>
+
+      <!-- PANEL DERECHO: RESULTADOS -->
+      <div class="col-lg-7">
+        <div id="msg"></div>
+        <div id="results">
+          <div class="card-soft p-5 text-center text-soft">
+            <div style="font-size:2.4rem">Σ</div>
+            <p class="mb-0">Pulsa <strong>Calcular</strong> para resolver el sistema de distribución.<br>Los datos de ejemplo ya están cargados.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer"><div class="container"><p class="mb-0">SimulaciónBolivia · Módulo 1 — Sistemas de ecuaciones lineales · Métodos Numéricos 2026.</p></div></footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+  <script src="../js/modulo1-sistemas.js"></script>
+</body>
+</html>
