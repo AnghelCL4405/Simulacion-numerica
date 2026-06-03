@@ -44,6 +44,18 @@
     </div>
   </header>
 
+  <section class="container mb-4">
+    <div class="howto">
+      <h6>📖 ¿Cómo funciona esto?</h6>
+      <p>Imagina que la ciudad tiene <strong>3 plantas</strong> de combustible y debe abastecer <strong>3 zonas</strong>: Norte, Centro y Sur.</p>
+      <ul>
+        <li>Cada <strong>fila</strong> es una planta; cada número dice cuánto puede aportar esa planta a cada zona.</li>
+        <li>La columna <strong>"Demanda"</strong> es cuánto combustible necesita cada zona.</li>
+        <li>Al pulsar <strong>Calcular</strong>, el sistema calcula <strong>cuánto enviar a cada zona</strong> para cubrir la demanda, muestra cómo llegó a la respuesta (tabla + gráfico) y lo explica en palabras. Más abajo puedes ver <strong>qué pasa si se bloquea una ruta</strong>.</li>
+      </ul>
+    </div>
+  </section>
+
   <main class="container pb-5">
     <div class="row g-4">
 
@@ -118,10 +130,120 @@
     </div>
   </main>
 
-  <footer class="footer"><div class="container"><p class="mb-0">SimulaciónBolivia · Módulo 1 — Sistemas de ecuaciones lineales · Métodos Numéricos 2026.</p></div></footer>
+  <!-- ===================== ESCENARIO F ===================== -->
+  <header class="container module-hero">
+    <span class="num">Módulo 1 · Escenario F</span>
+    <h1 class="mt-1">Rumores de desabastecimiento y pánico</h1>
+    <p class="text-soft mb-2" style="max-width: 840px;">
+      Mismo terreno (sistemas lineales), pero ahora <strong>mal condicionados</strong>. Cuando corre un rumor,
+      la demanda de una zona sube de golpe. Si el sistema es sensible, ese pequeño cambio se
+      <span class="text-orange">amplifica</span> y desordena todo el reparto. Lo medimos con el
+      <span class="mono">número de condición κ(A)</span> y la <span class="mono">perturbación de datos</span>.
+    </p>
+    <div class="d-flex flex-wrap gap-1">
+      <span class="tag tag-orange">Sistemas mal condicionados</span>
+      <span class="tag tag-orange">Número de condición</span>
+      <span class="tag tag-orange">Perturbación de datos</span>
+    </div>
+  </header>
+
+  <section class="container mb-4">
+    <div class="howto">
+      <h6>📖 ¿Cómo funciona esto?</h6>
+      <p>Aquí probamos qué tan <strong>frágil</strong> es la red de reparto cuando corre un rumor.</p>
+      <ul>
+        <li>Es el mismo tipo de sistema, pero <strong>mal condicionado</strong>: muy sensible a cambios pequeños.</li>
+        <li>Eliges <strong>en qué zona</strong> corre el rumor y <strong>cuánto sube la demanda</strong> (de +2% a +25%).</li>
+        <li>Al pulsar <strong>Aplicar rumor</strong>, verás si ese pequeño cambio altera poco o muchísimo el reparto (el <strong>"factor de amplificación"</strong>) y <strong>qué zona queda más vulnerable</strong>. Compara el botón <strong>"Mal condicionado"</strong> con <strong>"Bien condicionado"</strong> para notar la diferencia.</li>
+      </ul>
+    </div>
+  </section>
+
+  <main class="container pb-5">
+    <div class="row g-4">
+
+      <!-- PANEL IZQUIERDO: ENTRADA -->
+      <div class="col-lg-5">
+        <div class="card-soft p-4">
+          <h5 class="text-white mb-3">⚙️ Sistema y rumor</h5>
+
+          <label class="form-label">Sistema de demanda (A · x = b)</label>
+          <div class="d-flex gap-2 mb-3">
+            <button id="f_btnBad" class="btn btn-ghost flex-fill py-2">Mal condicionado</button>
+            <button id="f_btnGood" class="btn btn-ghost flex-fill py-2">Bien condicionado</button>
+          </div>
+
+          <div class="matrix-wrap mb-2">
+            <div class="matrix-block"><div id="f_matrixA" class="matrix-grid"></div></div>
+            <div class="d-flex align-items-center text-dim">=</div>
+            <div class="matrix-block"><div id="f_vectorB" class="vector-grid"></div></div>
+          </div>
+          <p class="form-text mb-3">b = demanda por zona (Norte, Centro, Sur). El rumor aumenta esa demanda.</p>
+
+          <label class="form-label">Método para resolver <span class="badge-select">▼ desplegable</span></label>
+          <select id="f_method" class="form-select method-select mb-3">
+            <option value="lu">LU (recomendado para mal condicionados)</option>
+            <option value="gauss">Gauss-Seidel</option>
+            <option value="sor">SOR</option>
+            <option value="cg">Gradiente Conjugado</option>
+            <option value="jacobi">Jacobi</option>
+          </select>
+
+          <div class="row g-2 mb-3">
+            <div class="col-6">
+              <label class="form-label">Zona donde corre el rumor</label>
+              <select id="f_zone" class="form-select">
+                <option value="2" selected>Zona Sur</option>
+                <option value="0">Zona Norte</option>
+                <option value="1">Zona Centro</option>
+                <option value="all">Todas las zonas</option>
+              </select>
+            </div>
+            <div class="col-6">
+              <label class="form-label">Intensidad del rumor</label>
+              <select id="f_rumor" class="form-select">
+                <option value="bajo">Rumor bajo (+2%)</option>
+                <option value="medio" selected>Rumor medio (+5%)</option>
+                <option value="alto">Rumor alto (+10%)</option>
+                <option value="panico">Pánico de compra (+25%)</option>
+              </select>
+            </div>
+          </div>
+
+          <button id="f_btnAnalyze" class="btn btn-orange w-100 py-2">Aplicar rumor y analizar</button>
+        </div>
+
+        <div class="algo-box mt-4">
+          <h6>📘 ¿Qué es un sistema mal condicionado?</h6>
+          <p class="text-soft mb-2">El <strong>número de condición</strong> mide cuánto amplifica el sistema los errores de los datos:</p>
+          <p class="mono text-orange">κ∞(A) = ‖A‖∞ · ‖A⁻¹‖∞</p>
+          <ul class="mb-0">
+            <li>κ cercano a <strong>1</strong> → bien condicionado: un rumor cambia poco la solución.</li>
+            <li>κ <strong>muy grande</strong> → mal condicionado: un rumor diminuto descontrola todo el reparto.</li>
+            <li>Cota del error: <code>(‖Δx‖/‖x‖) ≤ κ · (‖Δb‖/‖b‖)</code>.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- PANEL DERECHO: RESULTADOS -->
+      <div class="col-lg-7">
+        <div id="f_msg"></div>
+        <div id="f_results">
+          <div class="card-soft p-5 text-center text-soft">
+            <div style="font-size:2.4rem">📢</div>
+            <p class="mb-0">Pulsa <strong>Aplicar rumor y analizar</strong> para ver cómo un pequeño rumor<br>afecta a un sistema mal condicionado. El sistema de ejemplo ya está cargado.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer"><div class="container"><p class="mb-0">SimulaciónBolivia · Módulo 1 — Sistemas de ecuaciones lineales (Escenarios A y F) · Métodos Numéricos 2026.</p></div></footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
   <script src="../js/modulo1-sistemas.js"></script>
+  <script src="../js/modulo1-escenarioF.js"></script>
 </body>
 </html>

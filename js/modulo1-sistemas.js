@@ -25,12 +25,38 @@ const DEFAULT_B = [46, 84, 108];
 function buildInputs(n, A = null, b = null) {
   const mWrap = document.getElementById('matrixA');
   const bWrap = document.getElementById('vectorB');
-  mWrap.style.gridTemplateColumns = `repeat(${n}, auto)`;
+  mWrap.style.gridTemplateColumns = `auto repeat(${n}, auto)`;  // 1ª col = etiquetas de fila
   bWrap.style.gridTemplateColumns = `auto`;
   mWrap.innerHTML = '';
   bWrap.innerHTML = '';
 
+  // Etiquetas según contexto: n=3 => zonas y plantas de Bolivia; otros tamaños => genéricas
+  const cols = (n === 3) ? ['Norte', 'Centro', 'Sur'] : Array.from({ length: n }, (_, j) => 'x' + (j + 1));
+  const rows = (n === 3) ? ['Planta 1', 'Planta 2', 'Planta 3'] : Array.from({ length: n }, (_, i) => 'Ec. ' + (i + 1));
+
+  // Fila de encabezados: esquina vacía + nombre de cada columna (zona)
+  const corner = document.createElement('div');
+  corner.className = 'mlabel mlabel-corner';
+  mWrap.appendChild(corner);
+  cols.forEach(c => {
+    const h = document.createElement('div');
+    h.className = 'mlabel mlabel-col';
+    h.textContent = c;
+    mWrap.appendChild(h);
+  });
+  // Encabezado del vector b
+  const bHead = document.createElement('div');
+  bHead.className = 'mlabel mlabel-col';
+  bHead.textContent = 'Demanda';
+  bWrap.appendChild(bHead);
+
   for (let i = 0; i < n; i++) {
+    // Etiqueta de fila (planta)
+    const rl = document.createElement('div');
+    rl.className = 'mlabel mlabel-row';
+    rl.textContent = rows[i];
+    mWrap.appendChild(rl);
+
     for (let j = 0; j < n; j++) {
       const inp = document.createElement('input');
       inp.type = 'number'; inp.className = 'form-control'; inp.step = 'any';

@@ -40,6 +40,18 @@
     </div>
   </header>
 
+  <section class="container mb-4">
+    <div class="howto">
+      <h6>📖 ¿Cómo funciona esto?</h6>
+      <p>Simulamos cómo se <strong>vacía el tanque de reservas</strong> de una planta de combustible, día a día.</p>
+      <ul>
+        <li><strong>R₀</strong> es la reserva inicial; <strong>entrada</strong> es lo que llega por día; <strong>consumo base</strong> es lo que se gasta; el <strong>factor de pánico</strong> hace que el consumo crezca con el tiempo.</li>
+        <li><strong>T</strong> son los días a simular y <strong>h</strong> el tamaño del paso.</li>
+        <li>Al pulsar <strong>Simular</strong>, verás <strong>en qué día la reserva cae al nivel crítico</strong> (20%), una tabla día por día y un gráfico que compara los tres métodos.</li>
+      </ul>
+    </div>
+  </section>
+
   <main class="container pb-5">
     <div class="row g-4">
 
@@ -104,10 +116,109 @@
     </div>
   </main>
 
-  <footer class="footer"><div class="container"><p class="mb-0">SimulaciónBolivia · Módulo 5 — Ecuaciones diferenciales · Métodos Numéricos 2026.</p></div></footer>
+  <!-- ===================== ESCENARIO G ===================== -->
+  <header class="container module-hero">
+    <span class="num">Módulo 5 · Escenario G</span>
+    <h1 class="mt-1">Difusión de opinión y descontento social</h1>
+    <p class="text-soft mb-2" style="max-width: 840px;">
+      Ahora un <strong>sistema de EDO acopladas</strong> (modelo N-M-D). Los ciudadanos
+      <span class="text-orange">neutrales (N)</span> pueden volverse <span class="text-orange">manifestantes (M)</span>
+      si crece el malestar, y los <span class="text-orange">mediadores (D)</span> reducen el conflicto si hay diálogo.
+      Simulamos su evolución para ver si el conflicto se estabiliza o se masifica.
+    </p>
+    <p class="mono text-soft mb-2" style="max-width: 840px;">
+      N′ = −a·N·M + b·D &nbsp;·&nbsp; M′ = a·N·M − c·M·D &nbsp;·&nbsp; D′ = k·M − r·D
+    </p>
+    <div class="d-flex flex-wrap gap-1">
+      <span class="tag tag-blue">Heun</span><span class="tag tag-blue">RK4</span><span class="tag tag-blue">Sistema acoplado</span>
+    </div>
+  </header>
+
+  <section class="container mb-4">
+    <div class="howto">
+      <h6>📖 ¿Cómo funciona esto?</h6>
+      <p>Simulamos cómo se <strong>difunde el descontento social</strong> entre tres grupos: <strong>neutrales (N)</strong>, <strong>manifestantes (M)</strong> y <strong>mediadores (D)</strong>.</p>
+      <ul>
+        <li>Las <strong>poblaciones iniciales</strong> son qué porción de la gente empieza en cada grupo.</li>
+        <li>Los <strong>parámetros</strong> controlan el comportamiento: <strong>a</strong> = contagio del descontento, <strong>c</strong> = qué tan bien funciona el diálogo, <strong>k</strong> = cuántos mediadores aparecen, etc.</li>
+        <li>Al pulsar <strong>Simular</strong>, verás si el conflicto <strong>se calma o se masifica</strong>, con tabla y gráfico. Prueba <strong>"Con diálogo"</strong> frente a <strong>"Sin mediadores"</strong> para ver los dos extremos.</li>
+      </ul>
+    </div>
+  </section>
+
+  <main class="container pb-5">
+    <div class="row g-4">
+
+      <div class="col-lg-5">
+        <div class="card-soft p-4">
+          <h5 class="text-white mb-3">⚙️ Modelo social N-M-D</h5>
+
+          <div class="d-flex gap-2 mb-3">
+            <button id="g_btnStable" class="btn btn-ghost flex-fill py-2">Con diálogo</button>
+            <button id="g_btnMass" class="btn btn-ghost flex-fill py-2">Sin mediadores</button>
+          </div>
+
+          <label class="form-label">Método numérico <span class="badge-select">▼ desplegable</span></label>
+          <select id="g_method" class="form-select method-select mb-3">
+            <option value="rk4" selected>RK4 (Runge-Kutta 4º orden)</option>
+            <option value="heun">Heun</option>
+            <option value="euler">Euler</option>
+          </select>
+
+          <label class="form-label">Poblaciones iniciales (fracción)</label>
+          <div class="row g-2 mb-2">
+            <div class="col-4"><label class="form-label">N₀ neutrales</label><input id="g_N0" type="number" step="any" class="form-control" /></div>
+            <div class="col-4"><label class="form-label">M₀ manifest.</label><input id="g_M0" type="number" step="any" class="form-control" /></div>
+            <div class="col-4"><label class="form-label">D₀ mediadores</label><input id="g_D0" type="number" step="any" class="form-control" /></div>
+          </div>
+
+          <label class="form-label mt-2">Parámetros del modelo</label>
+          <div class="row g-2 mb-2">
+            <div class="col-6"><label class="form-label">a · contagio</label><input id="g_a" type="number" step="any" class="form-control" /></div>
+            <div class="col-6"><label class="form-label">b · retorno</label><input id="g_b" type="number" step="any" class="form-control" /></div>
+            <div class="col-6"><label class="form-label">c · diálogo</label><input id="g_c" type="number" step="any" class="form-control" /></div>
+            <div class="col-6"><label class="form-label">k · reacción</label><input id="g_k" type="number" step="any" class="form-control" /></div>
+            <div class="col-6"><label class="form-label">r · desgaste</label><input id="g_r" type="number" step="any" class="form-control" /></div>
+          </div>
+
+          <div class="row g-2 mb-3">
+            <div class="col-6"><label class="form-label">Tiempo total (días)</label><input id="g_T" type="number" step="any" class="form-control" /></div>
+            <div class="col-6"><label class="form-label">Paso h (días)</label><input id="g_h" type="number" step="any" class="form-control" /></div>
+          </div>
+
+          <button id="g_btnCalc" class="btn btn-blue w-100 py-2">Simular dinámica social</button>
+        </div>
+
+        <div class="algo-box mt-4">
+          <h6>📘 El modelo N-M-D</h6>
+          <ul class="mb-0">
+            <li><strong>a</strong> · tasa de contagio del descontento (N → M).</li>
+            <li><strong>b</strong> · retorno de mediadores a la neutralidad.</li>
+            <li><strong>c</strong> · efectividad del diálogo (frena M).</li>
+            <li><strong>k</strong> · reacción institucional que crea mediadores.</li>
+            <li><strong>r</strong> · desgaste de los mediadores.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-lg-7">
+        <div id="g_msg"></div>
+        <div id="g_results">
+          <div class="card-soft p-5 text-center text-soft">
+            <div style="font-size:2.4rem">⚖️</div>
+            <p class="mb-0">Pulsa <strong>Simular dinámica social</strong> para ver la evolución de neutrales,<br>manifestantes y mediadores. Los parámetros de ejemplo ya están cargados.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer"><div class="container"><p class="mb-0">SimulaciónBolivia · Módulo 5 — Ecuaciones diferenciales (Escenarios B y G) · Métodos Numéricos 2026.</p></div></footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
   <script src="../js/modulo5-edo.js"></script>
+  <script src="../js/modulo5-escenarioG.js"></script>
 </body>
 </html>

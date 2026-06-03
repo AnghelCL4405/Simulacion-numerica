@@ -89,22 +89,23 @@
   <!-- ===================== MÓDULOS ===================== -->
   <section class="container my-5" id="modulos">
     <span class="section-tag">Explora</span>
-    <h2 class="mb-1">Los 5 módulos de simulación</h2>
-    <p class="text-soft mb-4">Cada módulo implementa varios métodos numéricos <strong>desde cero en JavaScript</strong>, con datos de ejemplo precargados.</p>
+    <h2 class="mb-1">Los 5 módulos · 7 escenarios (A–G)</h2>
+    <p class="text-soft mb-4">Cada módulo implementa varios métodos numéricos <strong>desde cero en JavaScript</strong>, con datos de ejemplo precargados. Los módulos 1 y 5 cubren dos escenarios cada uno (A+F y B+G).</p>
     <div class="row g-4">
 
       <div class="col-md-6 col-lg-4">
         <a href="pages/modulo1.html" class="module-card card-soft p-4">
           <div class="d-flex justify-content-between align-items-start mb-3">
             <div class="icon-box">Σ</div>
-            <span class="pill">Módulo 1 · Escenario A</span>
+            <span class="pill">Módulo 1 · Escenarios A + F</span>
           </div>
           <h5 class="text-white mb-1">Sistemas de ecuaciones lineales</h5>
-          <p class="text-soft small mb-3">Distribución de carburantes desde 3 plantas hacia las zonas Norte, Centro y Sur.</p>
+          <p class="text-soft small mb-3">Distribución de carburantes (A) y cómo un rumor desestabiliza un sistema mal condicionado (F).</p>
           <div class="d-flex flex-wrap gap-1">
             <span class="tag tag-blue">LU</span><span class="tag tag-blue">Jacobi</span>
             <span class="tag tag-blue">Gauss-Seidel</span><span class="tag tag-blue">SOR</span>
             <span class="tag tag-blue">Grad. Conjugado</span>
+            <span class="tag tag-orange">Nº de condición</span>
           </div>
         </a>
       </div>
@@ -158,13 +159,14 @@
         <a href="pages/modulo5.html" class="module-card card-soft p-4">
           <div class="d-flex justify-content-between align-items-start mb-3">
             <div class="icon-box">∂</div>
-            <span class="pill">Módulo 5 · Escenario B</span>
+            <span class="pill">Módulo 5 · Escenarios B + G</span>
           </div>
           <h5 class="text-white mb-1">Ecuaciones diferenciales</h5>
-          <p class="text-soft small mb-3">Vaciado de reservas: R′(t) = entrada − consumo, con detección de nivel crítico.</p>
+          <p class="text-soft small mb-3">Vaciado de reservas (B) y el modelo social acoplado N-M-D de difusión del descontento (G).</p>
           <div class="d-flex flex-wrap gap-1">
             <span class="tag tag-blue">Euler</span><span class="tag tag-blue">Heun</span>
             <span class="tag tag-blue">RK4</span>
+            <span class="tag tag-orange">Sistema N-M-D</span>
           </div>
         </a>
       </div>
@@ -237,7 +239,7 @@
           <ul class="mb-0 text-soft">
             <li>Los modelos asumen comportamientos <strong>idealizados y continuos</strong>; la realidad social tiene saltos, decisiones humanas y eventos imprevistos (bloqueos repentinos).</li>
             <li>La <strong>interpolación</strong> solo es confiable <em>dentro</em> del rango de datos; extrapolar fuera de él (p. ej. día 40) puede dar valores irreales.</li>
-            <li>Los <strong>sistemas lineales</strong> suponen relaciones proporcionales; un mercado real es no lineal y puede estar mal condicionado (escenario F).</li>
+            <li>Los <strong>sistemas lineales</strong> suponen relaciones proporcionales; un mercado real es no lineal y puede estar mal condicionado, como analizamos en el <strong>Escenario F</strong> con el número de condición.</li>
             <li>Las <strong>EDO</strong> dependen fuertemente de parámetros (entrada, consumo, pánico) que en la práctica son difíciles de medir con precisión.</li>
             <li>No se incluyen variables externas: clima, decisiones políticas, contrabando o subsidios.</li>
           </ul>
@@ -248,8 +250,8 @@
           <h6>🚀 Mejoras posibles</h6>
           <ul class="mb-0">
             <li>Incorporar <strong>datos reales</strong> del INE o de mercados para calibrar los modelos.</li>
-            <li>Añadir <strong>análisis de sensibilidad</strong> y número de condición (escenario F) para medir estabilidad ante rumores.</li>
-            <li>Extender el módulo 5 al <strong>modelo social N-M-D</strong> (escenario G) con sistemas de EDO acopladas.</li>
+            <li>Calibrar los parámetros del <strong>modelo social N-M-D (Escenario G)</strong> con datos reales de conflictividad.</li>
+            <li>Añadir un <strong>análisis automático de sensibilidad</strong> que recorra varios niveles de rumor (Escenario F) y grafique la curva de amplificación.</li>
             <li>Permitir <strong>cargar datos por CSV</strong> y exportar resultados a PDF.</li>
             <li>Estimar automáticamente el <strong>orden de convergencia</strong> comparando errores sucesivos.</li>
           </ul>
@@ -293,7 +295,7 @@
       <div class="row gy-3">
         <div class="col-md-6">
           <h6 class="text-white mb-1">Simulación<span class="text-orange">Bolivia</span> · Métodos Numéricos</h6>
-          <p class="mb-0">Proyecto final individual — Escenarios A, B, C, D y E.</p>
+          <p class="mb-0">Proyecto final grupal — Escenarios A, B, C, D, E, F y G.</p>
           <p class="mb-0">Universidad · Ingeniería Informática · Quinto Semestre.</p>
         </div>
         <div class="col-md-6 text-md-end">
